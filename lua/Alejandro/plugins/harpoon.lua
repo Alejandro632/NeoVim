@@ -38,7 +38,5 @@ return {
 		-- vim.keymap.set("n", "<C-l>", function()
 		-- harpoon:list():select(4)
 		-- end)
-
-
 	end,
 }
