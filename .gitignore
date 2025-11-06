@@ -1,0 +1,8 @@
+# Ignore WezTerm config
+.wezterm.lua
+
+# Ignore Yazi config
+yazi.toml
+
+# Ignore PowerShell profile
+Microsoft.PowerShell_profile.ps1
