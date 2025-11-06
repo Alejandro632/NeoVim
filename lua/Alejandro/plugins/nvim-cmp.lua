@@ -290,9 +290,8 @@ return {
 					end
 				end, { "i", "s" }),
 
-				["<Tab>"] = cmp.mapping(function(_fallback)
+				["<Tab>"] = cmp.mapping(function(fallback)
 					if cmp.visible() then
-						-- if there is only one completion candidate then use it.
 						local entries = cmp.get_entries()
 						if #entries == 1 then
 							confirm(entries[1])
@@ -304,7 +303,7 @@ return {
 					elseif in_whitespace() then
 						smart_tab()
 					else
-						cmp.complete()
+						fallback() -- <-- this line actually *uses* the variable
 					end
 				end, { "i", "s" }),
 			}),

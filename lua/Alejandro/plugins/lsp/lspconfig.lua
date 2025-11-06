@@ -44,27 +44,6 @@ return {
 					{ desc = "Line diagnostics", buffer = ev.buf }
 				)
 
-				vim.keymap.set("n", "<leader>D", function()
-					telescope.diagnostics({
-						bufnr = 0,
-						previewer = true,
-						layout_strategy = "vertical",
-						layout_config = { height = 0.7 },
-					})
-				end, { desc = "Buffer diagnostics", buffer = ev.buf })
-
-				vim.keymap.set("n", "<leader>dw", function()
-					telescope.diagnostics({
-						previewer = true,
-						layout_strategy = "vertical",
-						layout_config = { height = 0.7 },
-					})
-				end, { desc = "Workspace diagnostics", buffer = ev.buf })
-
-				-- Quickfix
-				vim.keymap.set("n", "<leader>xq", function()
-					telescope.quickfix()
-				end, { desc = "Quickfix list", buffer = ev.buf })
 
 				-- Code actions and rename
 				vim.keymap.set(
