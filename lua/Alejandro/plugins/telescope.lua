@@ -20,12 +20,12 @@ return {
 		telescope.setup({
 			defaults = {
 				path_display = { "smart" },
-				mappings = {
-					i = {
-						["<C-k>"] = actions.move_selection_previous,
-						["<C-j>"] = actions.move_selection_next,
-					},
-				},
+				-- mappings = {
+				-- 	i = {
+				-- 		["<C-k>"] = actions.move_selection_previous,
+				-- 		["<C-j>"] = actions.move_selection_next,
+				-- 	},
+				-- },
 			},
 			extensions = {
 				themes = {
