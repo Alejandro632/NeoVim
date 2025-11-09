@@ -9,15 +9,9 @@ return {
 			"<cmd>Trouble diagnostics toggle filter.buf=0<cr>",
 			desc = "Buffer diagnostics",
 		},
-		-- Workspace diagnostics
-		{
-			"<leader>dw",
-			"<cmd>Trouble diagnostics toggle<cr>",
-			desc = "Workspace diagnostics",
-		},
 		-- Quickfix list
 		{
-			"<leader>xq",
+			"<leader>q",
 			"<cmd>Trouble quickfix toggle<cr>",
 			desc = "Quickfix list",
 		},

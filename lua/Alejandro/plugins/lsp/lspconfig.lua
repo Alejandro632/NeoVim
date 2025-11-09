@@ -6,56 +6,46 @@ return {
 		{ "antosha417/nvim-lsp-file-operations", config = true },
 	},
 	config = function()
-		-- LSP Keybinds
+		-- NOTE: LSP Keybinds
 		vim.api.nvim_create_autocmd("LspAttach", {
 			group = vim.api.nvim_create_augroup("UserLspConfig", {}),
 			callback = function(ev)
-				local opts = { buffer = ev.buf, silent = true }
-				local telescope = require("telescope.builtin")
-				local themes = require("telescope.themes")
+				local opts = { buffer = ev.buf, silent = true, noremap = true }
 
-				-- LSP navigation
-				vim.keymap.set("n", "gr", function()
-					telescope.lsp_references()
-				end, { desc = "Show LSP references", buffer = ev.buf })
-				vim.keymap.set("n", "gd", function()
-					telescope.lsp_definitions()
-				end, { desc = "Go to definition", buffer = ev.buf })
-				vim.keymap.set("n", "gi", function()
-					telescope.lsp_implementations()
-				end, { desc = "Go to implementation", buffer = ev.buf })
-				vim.keymap.set("n", "gt", function()
-					telescope.lsp_type_definitions()
-				end, { desc = "Go to type definition", buffer = ev.buf })
+				opts.desc = "Show LSP references"
+				vim.keymap.set("n", "grr", "<cmd>Telescope lsp_references<CR>", opts)
 
+				opts.desc = "Go to declaration"
+				vim.keymap.set("n", "gD", vim.lsp.buf.declaration, opts)
 
+				opts.desc = "Show LSP definitions"
+				vim.keymap.set("n", "gd", "<cmd>Telescope lsp_definitions<CR>", opts)
 
-				-- Diagnostics
-				vim.keymap.set(
-					"n",
-					"<leader>dl",
-					vim.diagnostic.open_float,
-					{ desc = "Line diagnostics", buffer = ev.buf }
-				)
+				opts.desc = "Show LSP implementations"
+				vim.keymap.set("n", "gri", "<cmd>Telescope lsp_implementations<CR>", opts)
 
+				opts.desc = "Show LSP type definitions"
+				vim.keymap.set("n", "grt", "<cmd>Telescope lsp_type_definitions<CR>", opts)
 
-				-- Code actions and rename
-				vim.keymap.set(
-					{ "n", "v" },
-					"<leader>ca",
-					vim.lsp.buf.code_action,
-					{ desc = "Code actions", buffer = ev.buf }
-				)
-				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename", buffer = ev.buf })
+				opts.desc = "See available code actions"
+				vim.keymap.set("n", "gra", vim.lsp.buf.code_action, opts)
 
-                --Signature help
-				vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = ev.buf })
+				opts.desc = "Smart rename"
+				vim.keymap.set("n", "grn", vim.lsp.buf.rename, opts)
 
-				-- LSP restart
-				vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", { desc = "Restart LSP", buffer = ev.buf })
+				opts.desc = "Show line diagnostics"
+				vim.keymap.set("n", "<leader>d", vim.diagnostic.open_float, opts)
+
+				opts.desc = "Show documentation for what is under cursor"
+				vim.keymap.set("n", "K", vim.lsp.buf.hover, opts)
+
+				opts.desc = "Restart LSP"
+				vim.keymap.set("n", "<leader>rs", "<cmd>LspRestart<CR>", opts)
+
+				opts.desc = "Show signature help"
+				vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 			end,
 		})
-
 		-- Diagnostic signs
 		local signs = {
 			[vim.diagnostic.severity.ERROR] = " ",
@@ -155,4 +145,3 @@ return {
 		vim.lsp.enable("gopls")
 	end,
 }
-
