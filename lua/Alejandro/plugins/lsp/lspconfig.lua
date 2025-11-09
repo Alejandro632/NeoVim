@@ -27,14 +27,8 @@ return {
 				vim.keymap.set("n", "gt", function()
 					telescope.lsp_type_definitions()
 				end, { desc = "Go to type definition", buffer = ev.buf })
-				-- Diagnostics navigation
-				-- Diagnostics navigation (new API)
-				vim.keymap.set("n", "[d", function()
-					vim.diagnostic.goto_prev({ wrap = false })
-				end, { desc = "Go to previous diagnostic", buffer = ev.buf })
-				vim.keymap.set("n", "]d", function()
-					vim.diagnostic.goto_next({ wrap = false })
-				end, { desc = "Go to next diagnostic", buffer = ev.buf })
+
+
 
 				-- Diagnostics
 				vim.keymap.set(
@@ -54,8 +48,7 @@ return {
 				)
 				vim.keymap.set("n", "<leader>rn", vim.lsp.buf.rename, { desc = "Smart rename", buffer = ev.buf })
 
-				-- Hover & signature help
-				vim.keymap.set("n", "K", vim.lsp.buf.hover, { desc = "Hover documentation", buffer = ev.buf })
+                --Signature help
 				vim.keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, { desc = "Signature help", buffer = ev.buf })
 
 				-- LSP restart
@@ -162,3 +155,4 @@ return {
 		vim.lsp.enable("gopls")
 	end,
 }
+
