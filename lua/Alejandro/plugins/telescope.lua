@@ -1,6 +1,6 @@
 return {
-	"nvim-telescope/telescope.nvim",
-	branch = "master", -- Using master to fix deprecated "to_definition" warnings
+    "nvim-telescope/telescope.nvim",
+	branch = "master",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
 		{ "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
@@ -8,24 +8,31 @@ return {
 		"andrew-george/telescope-themes",
 		"nvim-telescope/telescope-ui-select.nvim",
 	},
-
+	event = "VeryLazy", -- Changed: loads slightly later but ui-select still works
+	cmd = "Telescope",
+	keys = {
+		{ "<leader><leader>", "<cmd>Telescope find_files<cr>", desc = "[S]earch [F]iles" },
+		{ "<leader>g", "<cmd>Telescope live_grep<cr>", desc = "[S]earch by [G]rep" },
+		{ "<leader>b", "<cmd>Telescope buffers<cr>", desc = "[ ] Find existing buffers" },
+		{
+			"<leader>/",
+			function()
+				require("telescope.builtin").current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
+					winblend = 10,
+					previewer = false,
+				}))
+			end,
+			desc = "[/] Fuzzily search in current buffer",
+		},
+		{ "<leader>ths", "<cmd>Telescope themes<cr>", desc = "Theme Switcher" },
+	},
 	config = function()
 		local telescope = require("telescope")
 		local actions = require("telescope.actions")
-		local builtin = require("telescope.builtin")
-		telescope.load_extension("fzf")
-		telescope.load_extension("themes")
-		telescope.load_extension("ui-select")
 
 		telescope.setup({
 			defaults = {
 				path_display = { "smart" },
-				-- mappings = {
-				-- 	i = {
-				-- 		["<C-k>"] = actions.move_selection_previous,
-				-- 		["<C-j>"] = actions.move_selection_next,
-				-- 	},
-				-- },
 			},
 			extensions = {
 				themes = {
@@ -43,21 +50,9 @@ return {
 				},
 			},
 		})
-		-- Telescope keymaps
-		vim.keymap.set("n", "<leader><leader>", builtin.find_files, { desc = "[S]earch [F]iles" })
-		vim.keymap.set("n", "<leader>g", builtin.live_grep, { desc = "[S]earch by [G]rep" })
-		vim.keymap.set("n", "<leader>b", builtin.buffers, { desc = "[ ] Find existing buffers" })
-		vim.keymap.set("n", "<leader>/", function()
-			builtin.current_buffer_fuzzy_find(require("telescope.themes").get_dropdown({
-				winblend = 10,
-				previewer = false,
-			}))
-		end, { desc = "[/] Fuzzily search in current buffer" })
 
-		vim.keymap.set("n", "<leader>ths", "<cmd>Telescope themes<CR>", {
-			noremap = true,
-			silent = true,
-			desc = "Theme Switcher",
-		})
+		telescope.load_extension("fzf")
+		telescope.load_extension("themes")
+		telescope.load_extension("ui-select")
 	end,
 }

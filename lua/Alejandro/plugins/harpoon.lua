@@ -6,40 +6,22 @@ return {
 		"nvim-lua/plenary.nvim",
 		"nvim-telescope/telescope.nvim",
 	},
+	-- Lazy load on these keys instead of at startup
+	keys = {
+		{ "<leader>a", function() require("harpoon"):list():add() end, desc = "Harpoon add file" },
+		{ "<leader>h", function() require("harpoon").ui:toggle_quick_menu(require("harpoon"):list()) end, desc = "Harpoon menu" },
+		{ "<C-h>", function() require("harpoon"):list():select(1) end, desc = "Harpoon file 1" },
+		{ "<C-j>", function() require("harpoon"):list():select(2) end, desc = "Harpoon file 2" },
+		{ "<C-k>", function() require("harpoon"):list():select(3) end, desc = "Harpoon file 3" },
+		{ "<C-l>", function() require("harpoon"):list():select(4) end, desc = "Harpoon file 4" },
+	},
 	config = function()
 		local harpoon = require("harpoon")
-		local conf = require("telescope.config").values
-
 		harpoon:setup({
 			global_settings = {
 				save_on_toggle = true,
 				save_on_change = true,
 			},
 		})
-
-		--Harpoon Nav Interface
-		vim.keymap.set("n", "<leader>a", function()
-			harpoon:list():add()
-		end, { desc = "Harpoon add file" })
-		vim.keymap.set("n", "<leader>h", function()
-			harpoon.ui:toggle_quick_menu(harpoon:list())
-		end)
-
-		--Harpoon marked files
-		vim.keymap.set("n", "<C-h>", function()
-			harpoon:list():select(1)
-		end)
-		vim.keymap.set("n", "<C-j>", function()
-			harpoon:list():select(2)
-		end)
-		vim.keymap.set("n", "<C-k>", function()
-			harpoon:list():select(3)
-		end)
-		vim.keymap.set("n", "<C-l>", function()
-			harpoon:list():select(4)
-		end)
-		-- vim.keymap.set("n", "<C-l>", function()
-		-- harpoon:list():select(4)
-		-- end)
 	end,
 }
