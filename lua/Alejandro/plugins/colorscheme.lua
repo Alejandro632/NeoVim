@@ -92,6 +92,7 @@ return {
 	-- 	end,
 	-- },
 	-- -- NOTE: Catppuccin
+    
 	{
 		"catppuccin/nvim",
 		name = "catppuccin",
