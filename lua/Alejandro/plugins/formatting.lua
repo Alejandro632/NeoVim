@@ -22,15 +22,15 @@ return {
 						end, vim.diagnostic.get(ctx.buf))
 						return #diag > 0
 					end,
-				},
+				}
 			},
 			formatters_by_ft = {
-				javascript = { "biome-check" },
-				typescript = { "biome-check" },
-				javascriptreact = { "biome-check" },
-				typescriptreact = { "biome-check" },
-				css = { "biome-check" },
-				html = { "biome-check" },
+				-- javascript = { "biome-check" },
+				-- typescript = { "biome-check" },
+				-- javascriptreact = { "biome-check" },
+				-- typescriptreact = { "biome-check" },
+				-- css = { "biome-check" },
+				-- html = { "biome-check" },
 				svelte = { "prettier" },
 				json = { "prettier" },
 				yaml = { "prettier" },
@@ -38,7 +38,7 @@ return {
 				liquid = { "prettier" },
 				lua = { "stylua" },
 				python = { "black" },
-				markdown = { "prettier", "markdown-toc" },
+				-- markdown = { "prettier", "markdown-toc" },
 				-- ["markdown.mdx"] = { "prettier", "markdownlint", "markdown-toc" },
 			},
 			-- format_on_save = {

@@ -36,13 +36,13 @@ return {
 				vim.keymap.set("i", "<C-h>", vim.lsp.buf.signature_help, opts)
 			end,
 		})
-		
+
 		-- Diagnostic signs
 		local signs = {
-			[vim.diagnostic.severity.ERROR] = " ",
-			[vim.diagnostic.severity.WARN] = " ",
-			[vim.diagnostic.severity.HINT] = "󰠠 ",
-			[vim.diagnostic.severity.INFO] = " ",
+            [vim.diagnostic.severity.ERROR] = " ",
+            [vim.diagnostic.severity.WARN] = " ",
+            [vim.diagnostic.severity.HINT] = "󰠠 ",
+            [vim.diagnostic.severity.INFO] = " ",
 		}
 		vim.diagnostic.config({
 			signs = { text = signs },
@@ -50,12 +50,12 @@ return {
 			underline = true,
 			update_in_insert = false,
 		})
-		
+
 		-- LSP capabilities
 		local cmp_nvim_lsp = require("cmp_nvim_lsp")
 		local capabilities = cmp_nvim_lsp.default_capabilities()
 		vim.lsp.config("*", { capabilities = capabilities })
-		
+
 		-- Configure LSP servers
 		-- lua_ls
 		vim.lsp.config("lua_ls", {
@@ -73,7 +73,7 @@ return {
 			},
 		})
 		vim.lsp.enable("lua_ls")
-		
+
 		-- Python
 		vim.lsp.config("pyright", {
 			settings = {
@@ -87,7 +87,7 @@ return {
 			},
 		})
 		vim.lsp.enable("pyright")
-		
+
 		-- Emmet servers
 		vim.lsp.config("emmet_language_server", {
 			filetypes = {
@@ -105,12 +105,12 @@ return {
 			init_options = { showAbbreviationSuggestions = true, showExpandedAbbreviation = "always" },
 		})
 		vim.lsp.enable("emmet_language_server")
-		
+
 		vim.lsp.config("emmet_ls", {
 			filetypes = { "html", "typescriptreact", "javascriptreact", "css", "sass", "scss", "less", "svelte" },
 		})
 		vim.lsp.enable("emmet_ls")
-		
+
 		-- TypeScript/JavaScript
 		vim.lsp.config("ts_ls", {
 			filetypes = { "javascript", "javascriptreact", "typescript", "typescriptreact" },
@@ -123,7 +123,7 @@ return {
 			},
 		})
 		vim.lsp.enable("ts_ls")
-		
+
 		-- Go
 		vim.lsp.config("gopls", {
 			settings = {
