@@ -24,7 +24,6 @@ return {
             desc = "[/] Fuzzily search in current buffer",
         },
         { "<leader>ths", "<cmd>Telescope themes<cr>", desc = "Theme Switcher" },
-        -- Fixed: Ctrl+Space mapping
         { "<C-Space>", "<cmd>Telescope find_files<cr>", desc = "Find files", mode = {"n", "i"} },
     },
     config = function()
@@ -33,6 +32,16 @@ return {
         telescope.setup({
             defaults = {
                 path_display = { "smart" },
+                mappings = {
+                    i = { -- insert mode
+                        ["<M-o>"] = "select_vertical",
+                        ["<M-i>"] = "select_horizontal",
+                    },
+                    n = { -- normal mode
+                        ["<M-o>"] = "select_vertical",
+                        ["<M-i>"] = "select_horizontal",
+                    },
+                },
             },
             extensions = {
                 themes = {
